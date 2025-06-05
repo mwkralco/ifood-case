@@ -1,7 +1,10 @@
+# View da tabela gold.yellow_tripdata
 paths = [f's3a://{bucket}/gold/yellow_tripdata/year={year_val}/month={m}/' for m in months]
 df = spark.read.parquet(*paths)
 df.createOrReplaceTempView("yellow_tripdata")
 
+# Código para responder:
+## média do total_amount por mês
 result = spark.sql("""
     SELECT 
         YEAR(tpep_pickup_datetime) AS year,
@@ -14,6 +17,8 @@ result = spark.sql("""
 """)
 result.show()
 
+# Código para responder:
+## média de passenger_count por hora no mês de Maio
 result = spark.sql("""
     SELECT 
         HOUR(tpep_pickup_datetime) AS pickup_hour,
